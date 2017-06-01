@@ -11,15 +11,12 @@ void printInfo(Node* node)
 
 Node* pop_front(std::vector<Node*>* vec)
 {
-  //cout<<"Popping"<<endl;
   if((vec->size() == 0))
   {
-    // cout<<"Empty"<<endl;
     exit(-1);
   }
   Node* node = vec->at(0);
   vec->erase(vec->begin());
-  // cout<<"Printing: "<<node->character<<" of val: "<<node->frequency<<endl;
   return node;
 }
 
@@ -61,7 +58,6 @@ void sort_vector(vector<Node*>* nodes)
 
 void insert_to_min_heap(std::vector<Node*>* nodes, Node* internal_node)
 {
-  //cout<<"Inserting"<<endl;
   for(unsigned int i = 0; i < nodes->size(); ++i)
   {
     Node* current = nodes->at(i);
@@ -83,25 +79,17 @@ void printNodesVector(std::vector<Node*>* nodes)
 }
 
 void build_heap(std::vector<Node*>* nodes) {
-  //Node* rootNode = convertToLinkedTree(nodes);
-  // printNodesVector(nodes);
   while(nodes->size() > 1)
   {
     Node* leftNode = pop_front(nodes);
     Node* rightNode = pop_front(nodes);
 
     int new_freq = leftNode->frequency + rightNode->frequency;
-    // cout<<new_freq<<" added"<<endl;
     Node* internal = new Node(' ', new_freq);
     internal->left = leftNode;
     internal->right = rightNode;
     insert_to_min_heap(nodes, internal);
-
-    // printNodesVector(nodes);
-    // cout<<"Heap size: "<<nodes->size();
-    // cout<<endl<<endl;
   }
-  // printNodesVector(nodes);
 }
 
 
@@ -131,8 +119,6 @@ map<char,string> getHuffman(vector<char> characters, vector<int> frequencies)
   sort_vector(nodes);
   build_heap(nodes);
   backtracking(nodes->at(0), "", &answer);
-  // printInorder(nodes->at(0));
-  // cout<<" Ended"<<endl;
   free(nodes);
   return answer;
 }
